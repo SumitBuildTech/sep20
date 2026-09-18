@@ -1,0 +1,581 @@
+/* =========================
+   BASIC RESET
+========================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+
+    font-family: "Segoe UI", Arial, sans-serif;
+
+    color: white;
+
+    overflow-x: hidden;
+
+    background:
+        linear-gradient(
+            rgba(20, 5, 8, 0.35),
+            rgba(30, 8, 10, 0.45)
+        ),
+        url("images/background.jpg");
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+
+/* =========================
+   HEART SCREEN
+========================= */
+
+.heart-screen {
+    min-height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+
+    padding: 20px;
+
+    transition:
+        opacity 1.2s ease,
+        transform 1.2s ease;
+}
+
+
+/* =========================
+   BIG HEART
+========================= */
+
+.heart {
+    width: 32vw;
+    height: 32vw;
+
+    max-width: 430px;
+    max-height: 430px;
+
+    min-width: 250px;
+    min-height: 250px;
+
+    position: relative;
+
+    background:
+        radial-gradient(
+            circle at 35% 25%,
+            #ff9a9e 0%,
+            #ff416c 35%,
+            #d41445 75%,
+            #8e092c 100%
+        );
+
+    transform: rotate(-45deg);
+
+    cursor: pointer;
+
+    border-radius: 12px;
+
+    box-shadow:
+        0 0 20px rgba(255, 80, 110, 0.7),
+        0 0 50px rgba(255, 90, 60, 0.5),
+        0 20px 60px rgba(0, 0, 0, 0.6);
+
+    transition:
+        transform 0.4s ease,
+        box-shadow 0.4s ease;
+}
+
+
+/* Heart circles */
+
+.heart::before,
+.heart::after {
+    content: "";
+
+    width: 100%;
+    height: 100%;
+
+    position: absolute;
+
+    background: inherit;
+
+    border-radius: 50%;
+}
+
+
+.heart::before {
+    top: -50%;
+    left: 0;
+}
+
+
+.heart::after {
+    top: 0;
+    left: 50%;
+}
+
+
+/* =========================
+   HEART GLOW
+========================= */
+
+.heart:hover {
+
+    transform:
+        rotate(-45deg)
+        scale(1.06);
+
+    box-shadow:
+        0 0 30px rgba(255, 80, 110, 0.9),
+        0 0 80px rgba(255, 100, 60, 0.7),
+        0 25px 70px rgba(0, 0, 0, 0.7);
+}
+
+
+/* =========================
+   HEART TEXT
+========================= */
+
+.heart-text {
+
+    position: absolute;
+
+    z-index: 10;
+
+    width: 100%;
+
+    top: 38%;
+    left: 0;
+
+    text-align: center;
+
+    transform: rotate(45deg);
+
+    color: white;
+
+    text-shadow:
+        0 2px 5px rgba(0, 0, 0, 0.4),
+        0 0 15px rgba(255, 255, 255, 0.4);
+}
+
+
+.heart-text span {
+
+    display: block;
+
+    font-family: "Segoe Script",
+                 "Brush Script MT",
+                 cursive;
+
+    font-size: clamp(28px, 4vw, 48px);
+
+    font-weight: bold;
+
+    letter-spacing: 1px;
+}
+
+
+.heart-text small {
+
+    display: block;
+
+    margin-top: 12px;
+
+    font-size: 32px;
+
+    animation: smallHeart 1.3s infinite;
+}
+
+
+/* =========================
+   HINT TEXT
+========================= */
+
+.hint {
+
+    margin-top: 50px;
+
+    font-family:
+        "Segoe Script",
+        "Brush Script MT",
+        cursive;
+
+    font-size: 20px;
+
+    letter-spacing: 1px;
+
+    color: #ffe6c7;
+
+    text-shadow:
+        0 0 10px rgba(255, 130, 70, 0.8);
+
+    animation: hintGlow 2s infinite alternate;
+}
+
+
+/* =========================
+   HEART CLICK ANIMATION
+========================= */
+
+.heart.clicked {
+
+    animation: heartbeat 0.8s ease;
+}
+
+
+@keyframes heartbeat {
+
+    0% {
+        transform:
+            rotate(-45deg)
+            scale(1);
+    }
+
+    25% {
+        transform:
+            rotate(-45deg)
+            scale(1.15);
+    }
+
+    50% {
+        transform:
+            rotate(-45deg)
+            scale(0.94);
+    }
+
+    75% {
+        transform:
+            rotate(-45deg)
+            scale(1.08);
+    }
+
+    100% {
+        transform:
+            rotate(-45deg)
+            scale(1);
+    }
+}
+
+
+/* =========================
+   SURPRISE CONTENT
+========================= */
+
+.surprise-content {
+
+    display: none;
+
+    min-height: 100vh;
+
+    padding:
+        60px 20px 80px;
+
+    text-align: center;
+}
+
+
+.surprise-content.show {
+
+    display: block;
+
+    animation:
+        surpriseFade 1.5s ease;
+}
+
+
+.surprise-content h1 {
+
+    margin-bottom: 35px;
+
+    font-family:
+        "Segoe Script",
+        "Brush Script MT",
+        cursive;
+
+    font-size: clamp(30px, 5vw, 48px);
+
+    color: #ffe4c4;
+
+    text-shadow:
+        0 0 12px rgba(255, 110, 60, 0.8),
+        0 4px 15px rgba(0, 0, 0, 0.5);
+}
+
+
+/* =========================
+   PHOTO SLIDESHOW
+========================= */
+
+.slideshow {
+
+    width: 90%;
+
+    max-width: 520px;
+
+    height: 520px;
+
+    margin: auto;
+
+    position: relative;
+
+    overflow: hidden;
+
+    border-radius: 25px;
+
+    border:
+        1px solid rgba(255, 190, 140, 0.5);
+
+    box-shadow:
+        0 0 25px rgba(255, 90, 50, 0.4),
+        0 15px 50px rgba(0, 0, 0, 0.6);
+}
+
+
+.slide {
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    position: absolute;
+
+    left: 0;
+    top: 0;
+
+    opacity: 0;
+
+    transform: scale(1.05);
+
+    transition:
+        opacity 1.2s ease,
+        transform 4s ease;
+}
+
+
+.slide.active {
+
+    opacity: 1;
+
+    transform: scale(1);
+}
+
+
+/* =========================
+   SLIDESHOW DOTS
+========================= */
+
+.dots {
+
+    margin-top: 22px;
+}
+
+
+.dot {
+
+    display: inline-block;
+
+    width: 9px;
+    height: 9px;
+
+    margin: 5px;
+
+    background: #ffe0c0;
+
+    border-radius: 50%;
+
+    opacity: 0.4;
+
+    transition: 0.3s;
+}
+
+
+.active-dot {
+
+    opacity: 1;
+
+    transform: scale(1.4);
+
+    box-shadow:
+        0 0 10px #ff9b63;
+}
+
+
+/* =========================
+   MESSAGE BOX
+========================= */
+
+.message {
+
+    width: 90%;
+
+    max-width: 700px;
+
+    margin:
+        45px auto 20px;
+
+    padding:
+        35px 30px;
+
+    background:
+        rgba(30, 10, 12, 0.48);
+
+    backdrop-filter: blur(12px);
+
+    -webkit-backdrop-filter: blur(12px);
+
+    border:
+
+        1px solid
+        rgba(255, 190, 140, 0.35);
+
+    border-radius: 25px;
+
+    box-shadow:
+        0 15px 40px rgba(0, 0, 0, 0.45);
+}
+
+
+.message h2 {
+
+    margin-bottom: 20px;
+
+    font-family:
+        "Segoe Script",
+        "Brush Script MT",
+        cursive;
+
+    font-size: 32px;
+
+    color: #ffd7b0;
+
+    text-shadow:
+        0 0 12px rgba(255, 100, 50, 0.6);
+}
+
+
+.message p {
+
+    margin: 14px 0;
+
+    font-size: 18px;
+
+    line-height: 1.9;
+
+    color: #fff1e5;
+}
+
+
+/* =========================
+   ANIMATIONS
+========================= */
+
+@keyframes smallHeart {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.3);
+    }
+}
+
+
+@keyframes hintGlow {
+
+    from {
+        opacity: 0.65;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+
+@keyframes surpriseFade {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            translateY(30px);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            translateY(0);
+
+    }
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 600px) {
+
+    .heart {
+
+        width: 65vw;
+        height: 65vw;
+
+        min-width: 220px;
+        min-height: 220px;
+
+    }
+
+
+    .heart-text span {
+
+        font-size: 27px;
+
+    }
+
+
+    .hint {
+
+        font-size: 16px;
+
+        text-align: center;
+
+    }
+
+
+    .slideshow {
+
+        height: 400px;
+
+    }
+
+
+    .message {
+
+        padding: 28px 20px;
+
+    }
+
+
+    .message p {
+
+        font-size: 16px;
+
+    }
+
+}
